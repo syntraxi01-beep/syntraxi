@@ -1,0 +1,140 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Syntraxi design system — "Cloud geométrico"
+ * Paleta clara (Cloud White) con acento azul y tipografía geométrica futurista.
+ * Todos los colores en oklch y expuestos como tokens semánticos.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 16px);
+  --radius-4xl: calc(var(--radius) + 24px);
+
+  --font-display: var(--font-family-display);
+  --font-sans: var(--font-family-sans);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-ink-muted: var(--ink-muted);
+  --color-success: var(--success);
+  --color-whatsapp: var(--whatsapp);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --shadow-glow: 0 18px 40px -18px color-mix(in oklab, var(--primary) 55%, transparent);
+  --shadow-panel: 0 24px 60px -32px oklch(0.208 0.042 265 / 0.35);
+}
+
+:root {
+  --radius: 1rem;
+  --font-family-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-family-sans: "Sora", ui-sans-serif, system-ui, sans-serif;
+
+  --background: oklch(0.986 0.002 247.8);
+  --foreground: oklch(0.208 0.042 265.7);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.208 0.042 265.7);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.208 0.042 265.7);
+  --primary: oklch(0.623 0.214 259.3);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.936 0.008 247.9);
+  --secondary-foreground: oklch(0.208 0.042 265.7);
+  --muted: oklch(0.936 0.008 247.9);
+  --muted-foreground: oklch(0.66 0.035 256.8);
+  --accent: oklch(0.936 0.008 247.9);
+  --accent-foreground: oklch(0.208 0.042 265.7);
+  --destructive: oklch(0.577 0.245 27.3);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.936 0.008 247.9);
+  --input: oklch(0.92 0.01 247.9);
+  --ring: oklch(0.623 0.214 259.3);
+  --ink: oklch(0.208 0.042 265.7);
+  --ink-foreground: oklch(0.986 0.002 247.8);
+  --ink-muted: oklch(0.71 0.035 256.8);
+  --success: oklch(0.72 0.17 152);
+  --whatsapp: oklch(0.75 0.17 150);
+  --sidebar: oklch(0.986 0.002 247.8);
+  --sidebar-foreground: oklch(0.208 0.042 265.7);
+  --sidebar-primary: oklch(0.623 0.214 259.3);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.936 0.008 247.9);
+  --sidebar-accent-foreground: oklch(0.208 0.042 265.7);
+  --sidebar-border: oklch(0.936 0.008 247.9);
+  --sidebar-ring: oklch(0.623 0.214 259.3);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-family-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-family-display);
+    letter-spacing: -0.02em;
+  }
+}
+
+@utility eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--primary) 25%, transparent);
+  background: color-mix(in oklab, var(--primary) 10%, transparent);
+  color: var(--primary);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@utility panel-ink {
+  background: var(--ink);
+  color: var(--ink-foreground);
+}

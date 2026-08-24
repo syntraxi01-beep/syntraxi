@@ -1,0 +1,4 @@
+# Reemplaza project_id por el de tu propio proyecto si usas el CLI de Supabase
+# (`supabase link --project-ref TU_PROJECT_ID`). No es necesario para correr
+# las migraciones manualmente desde el SQL Editor del dashboard.
+project_id = "tu-proyecto-supabase"
