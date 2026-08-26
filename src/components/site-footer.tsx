@@ -1,14 +1,20 @@
 import { Link } from "@tanstack/react-router";
+import logo from "@/assets/logo.png";
 
 // TODO: reemplaza el número de WhatsApp por el real de tu empresa.
 export const WHATSAPP_URL =
-  "https://wa.me/573001112233?text=" + encodeURIComponent("Hola Syntraxi, quiero información sobre importaciones.");
+  "https://wa.me/573117491761?text=" + encodeURIComponent("Hola Syntraxi, quiero información sobre importaciones.");
 
 export function SiteFooter() {
   return (
     <footer className="border-t border-border bg-background px-6 py-12">
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-8 md:flex-row">
-        <span className="font-display text-xl font-bold tracking-tighter text-muted-foreground">SYNTRAXI</span>
+        <span className="flex items-center gap-2">
+          <img src={logo} alt="Syntraxi" className="size-7 rounded-md opacity-90" />
+          <span className="font-display text-xl font-bold tracking-tighter text-muted-foreground">
+            SYNTRAXI
+          </span>
+        </span>
         <div className="flex flex-wrap justify-center gap-8 text-xs font-bold uppercase tracking-widest text-muted-foreground">
           <Link to="/servicios">Servicios</Link>
           <Link to="/cotizador">Cotizador</Link>
