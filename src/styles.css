@@ -5,9 +5,10 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Syntraxi design system — "Neon Steel"
- * Paleta oscura tomada directamente del logo (azul eléctrico #0081ff sobre
- * negro azulado) con tipografía geométrica futurista.
+ * Syntraxi design system — "Cloud + Neon" (v2)
+ * Base clara (fácil de leer en tienda, cotizador, checkout, portal) con el
+ * azul exacto del logo (#0081ff) como acento principal, y el negro-azulado
+ * del logo reservado para el hero de portada y el footer (token --ink).
  * Todos los colores en oklch y expuestos como tokens semánticos.
  */
 
@@ -66,37 +67,37 @@
   --font-family-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-family-sans: "Sora", ui-sans-serif, system-ui, sans-serif;
 
-  --background: oklch(0.128 0.013 263.6);
-  --foreground: oklch(0.963 0.012 259.8);
-  --card: oklch(0.184 0.030 265.8);
-  --card-foreground: oklch(0.963 0.012 259.8);
-  --popover: oklch(0.184 0.030 265.8);
-  --popover-foreground: oklch(0.963 0.012 259.8);
+  --background: oklch(0.986 0.002 247.8);
+  --foreground: oklch(0.208 0.042 265.7);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.208 0.042 265.7);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.208 0.042 265.7);
   --primary: oklch(0.617 0.210 255.9);
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.220 0.037 265.2);
-  --secondary-foreground: oklch(0.963 0.012 259.8);
-  --muted: oklch(0.220 0.037 265.2);
-  --muted-foreground: oklch(0.702 0.047 261.1);
-  --accent: oklch(0.261 0.051 261.3);
-  --accent-foreground: oklch(0.963 0.012 259.8);
-  --destructive: oklch(0.691 0.199 23.9);
+  --secondary: oklch(0.936 0.008 247.9);
+  --secondary-foreground: oklch(0.208 0.042 265.7);
+  --muted: oklch(0.936 0.008 247.9);
+  --muted-foreground: oklch(0.66 0.035 256.8);
+  --accent: oklch(0.936 0.008 247.9);
+  --accent-foreground: oklch(0.208 0.042 265.7);
+  --destructive: oklch(0.577 0.245 27.3);
   --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.282 0.050 262.7);
-  --input: oklch(0.258 0.047 262.6);
+  --border: oklch(0.936 0.008 247.9);
+  --input: oklch(0.92 0.01 247.9);
   --ring: oklch(0.617 0.210 255.9);
   --ink: oklch(0.084 0.012 255.9);
   --ink-foreground: oklch(0.978 0.007 260.7);
   --ink-muted: oklch(0.812 0.031 262.5);
-  --success: oklch(0.773 0.153 163.2);
+  --success: oklch(0.72 0.17 152);
   --whatsapp: oklch(0.761 0.201 149.7);
-  --sidebar: oklch(0.184 0.030 265.8);
-  --sidebar-foreground: oklch(0.963 0.012 259.8);
+  --sidebar: oklch(0.986 0.002 247.8);
+  --sidebar-foreground: oklch(0.208 0.042 265.7);
   --sidebar-primary: oklch(0.617 0.210 255.9);
   --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.220 0.037 265.2);
-  --sidebar-accent-foreground: oklch(0.963 0.012 259.8);
-  --sidebar-border: oklch(0.282 0.050 262.7);
+  --sidebar-accent: oklch(0.936 0.008 247.9);
+  --sidebar-accent-foreground: oklch(0.208 0.042 265.7);
+  --sidebar-border: oklch(0.936 0.008 247.9);
   --sidebar-ring: oklch(0.617 0.210 255.9);
 }
 
