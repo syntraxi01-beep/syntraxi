@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { packagesQuery, productsQuery, productImage } from "@/lib/catalog";
 import { usdExact } from "@/lib/quote";
 import { useCart } from "@/components/cart";
-import heroImg from import heroImg from "@/assets/hero-puerto.jpg";
+import heroImg from "@/assets/hero-puerto.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
