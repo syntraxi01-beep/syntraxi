@@ -59,7 +59,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
           >
             Reintentar
           </button>
-          <a
+          
             href="/"
             className="inline-flex items-center justify-center rounded-xl border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
@@ -82,7 +82,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Importa desde China con proveedores validados, logística y aduanas gestionadas. Tienda, cotizador y portal de cliente.",
       },
-      {       { name: "author", content: "Syntraxi" },
+      { name: "author", content: "Syntraxi" },
       { property: "og:type", content: "website" },
       { property: "og:image", content: "https://syntraxi.com/og-image.jpg" },
       { property: "og:image:width", content: "1200" },
@@ -99,6 +99,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@300;400;500;600;700&display=swap",
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
     ],
   }),
   shellComponent: RootShell,
