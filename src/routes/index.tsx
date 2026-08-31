@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { Boxes, Factory, Bot, ArrowRight } from "lucide-react";
+import { Boxes, Factory, Bot, ArrowRight, Gauge, Radio, Zap, ClipboardCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { packagesQuery, productsQuery, productImage } from "@/lib/catalog";
+import { packagesQuery } from "@/lib/catalog";
 import { usdExact } from "@/lib/quote";
 import { useCart } from "@/components/cart";
 import heroImg from "@/assets/hero-puerto.jpg";
@@ -16,7 +16,7 @@ export const Route = createFileRoute("/")({
         content:
           "Proveedores validados, control de calidad, aduanas y entrega en tu puerta. Cotiza en línea, compra productos importados y sigue tu pedido.",
       },
-      { property: "og:title", content: "Syntraxi — Importa desde China a Colombia" },
+      { property: "og:title", content: "Syntraxi — Importación desde China a Colombia" },
       {
         property: "og:description",
         content: "Importación inteligente, tienda en línea, cotizador y portal de cliente.",
@@ -24,10 +24,7 @@ export const Route = createFileRoute("/")({
     ],
   }),
   loader: async ({ context }) => {
-    await Promise.all([
-      context.queryClient.ensureQueryData(productsQuery),
-      context.queryClient.ensureQueryData(packagesQuery),
-    ]);
+    await context.queryClient.ensureQueryData(packagesQuery);
   },
   component: Home,
 });
@@ -59,11 +56,38 @@ const services = [
   },
 ] as const;
 
+const instrumentationBrands = ["Endress+Hauser", "Siemens S7-1200", "Lazos 4-20 mA", "Diagramas P&ID"] as const;
+
+const instrumentationServices = [
+  {
+    icon: Gauge,
+    title: "Mantenimiento y telemetría de caudal",
+    sector: "Servicios públicos · Acueductos · Infraestructura hídrica",
+    body: "Calibración, diagnóstico en sitio y monitoreo de macromedidores y registradores de datos en red.",
+  },
+  {
+    icon: Radio,
+    title: "Puesta en marcha e instrumentación",
+    sector: "Industria química · Agroindustria · Plantas de procesamiento",
+    body: "Configuración, calibración y comunicación inalámbrica o por lazo de sensores de nivel, flujo y presión.",
+  },
+  {
+    icon: Zap,
+    title: "Reestructuración de tableros de control",
+    sector: "Manufactura · Transformación · Líneas continuas",
+    body: "Corrección de fallas en tableros de potencia para reactores o motores, integración de borneras y PLCs.",
+  },
+  {
+    icon: ClipboardCheck,
+    title: "Peritaje técnico y diagnóstico exprés",
+    sector: "Contratistas de ingeniería · Aseguradoras · Paradas de planta",
+    body: "Inspección técnica especializada, pruebas de campo con monitoreo continuo y reporte técnico formal.",
+  },
+] as const;
+
 function Home() {
-  const { data: products } = useSuspenseQuery(productsQuery);
   const { data: packages } = useSuspenseQuery(packagesQuery);
   const { add } = useCart();
-  const featured = products.filter((p) => p.featured).slice(0, 3);
 
   return (
     <>
@@ -150,51 +174,36 @@ function Home() {
 
       <section className="px-6 py-24">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
-            <div>
-              <h2 className="mb-2 font-display text-4xl font-bold">Productos con despacho inmediato</h2>
-              <p className="text-muted-foreground">Importación directa, ya nacionalizada y lista para entregar.</p>
-            </div>
-            <Link to="/tienda" className="text-sm font-bold text-primary underline underline-offset-4">
-              Ir a la tienda
-            </Link>
+          <div className="mb-10 max-w-2xl">
+            <span className="eyebrow mb-4">Instrumentación & automatización industrial</span>
+            <h2 className="mb-4 font-display text-4xl font-bold">Servicios de instrumentación</h2>
+            <p className="text-muted-foreground">
+              Más de 8 años de experiencia en diagnóstico de campo, integración de marcas líderes del sector y
+              respaldo técnico documentado para auditorías y clientes finales.
+            </p>
           </div>
 
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {featured.map((product) => (
-              <article key={product.id} className="overflow-hidden rounded-3xl border border-border bg-card">
-                <img
-                  src={productImage(product)}
-                  alt={product.name}
-                  loading="lazy"
-                  width={800}
-                  height={800}
-                  className="aspect-square w-full border-b border-border object-cover"
-                />
-                <div className="p-6">
-                  <div className="mb-2 flex items-start justify-between gap-3">
-                    <h3 className="font-display text-lg font-bold leading-tight">{product.name}</h3>
-                    <span className="whitespace-nowrap text-sm font-semibold text-primary">
-                      {usdExact(product.price_usd)}
-                    </span>
-                  </div>
-                  <p className="mb-6 text-xs leading-relaxed text-muted-foreground">{product.description}</p>
-                  <Button
-                    className="w-full rounded-lg"
-                    onClick={() =>
-                      add({
-                        id: product.id,
-                        slug: product.slug,
-                        name: product.name,
-                        price_usd: product.price_usd,
-                        kind: "producto",
-                      })
-                    }
-                  >
-                    Añadir al carrito
-                  </Button>
+          <div className="mb-10 flex flex-wrap gap-3">
+            {instrumentationBrands.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-border bg-card px-4 py-2 text-xs font-bold uppercase tracking-widest text-muted-foreground"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-2">
+            {instrumentationServices.map((service) => (
+              <div key={service.title} className="rounded-3xl border border-border bg-card p-8">
+                <div className="mb-6 grid size-12 place-items-center rounded-xl bg-secondary text-foreground">
+                  <service.icon className="size-5" />
                 </div>
-              </article>
+                <p className="mb-2 text-[10px] font-bold uppercase tracking-widest text-primary">{service.sector}</p>
+                <h3 className="mb-3 font-display text-xl font-bold">{service.title}</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">{service.body}</p>
+              </div>
             ))}
           </div>
         </div>
