@@ -10,6 +10,10 @@ import {
 import { packagesQuery } from "@/lib/catalog";
 import { usdExact } from "@/lib/quote";
 import { useCart } from "@/components/cart";
+import inst1 from "@/assets/inst-1.jpg";
+import inst2 from "@/assets/inst-2.jpg";
+import inst3 from "@/assets/inst-3.jpg";
+import inst4 from "@/assets/inst-4.jpg";
 
 export const Route = createFileRoute("/servicios")({
   head: () => ({
@@ -27,6 +31,13 @@ export const Route = createFileRoute("/servicios")({
   loader: ({ context }) => context.queryClient.ensureQueryData(packagesQuery),
   component: Servicios,
 });
+
+const instrumentacionFotos = [
+  { src: inst1, alt: "Técnico de Syntraxi realizando trabajo en altura sobre un recipiente a presión" },
+  { src: inst2, alt: "Calibración de transmisor Rosemount en campo" },
+  { src: inst3, alt: "Banco de calibración con equipo Ametek en taller" },
+  { src: inst4, alt: "Calibración de instrumento de presión en planta" },
+];
 
 const instrumentacion = [
   {
@@ -139,6 +150,21 @@ function Servicios() {
           <p className="mb-10 text-xs uppercase tracking-widest text-primary/80">
             Endress+Hauser · PLC Siemens S7-1200 · tableros de control
           </p>
+
+          <div className="mb-10 grid grid-cols-2 gap-4 md:grid-cols-4">
+            {instrumentacionFotos.map((foto) => (
+              <img
+                key={foto.src}
+                src={foto.src}
+                alt={foto.alt}
+                loading="lazy"
+                width={700}
+                height={620}
+                className="aspect-[4/5] w-full rounded-2xl border border-border object-cover"
+              />
+            ))}
+          </div>
+
           <div className="divide-y divide-border border-y border-border">
             {instrumentacion.map((item) => (
               <div key={item.title} className="grid gap-4 py-6 md:grid-cols-[1fr_240px] md:items-center">
