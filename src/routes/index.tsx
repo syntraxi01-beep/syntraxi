@@ -76,7 +76,7 @@ const instrumentationServices = [
     icon: Zap,
     title: "Reestructuración de tableros de control",
     sector: "Manufactura · Transformación · Líneas continuas",
-    body:     body: "Corrección de fallas en tableros de potencia para reactores o motores, integración de señales de campo en PLC.",
+    body:   "Corrección de fallas en tableros de potencia para reactores o motores, integración de señales de campo en PLC.",
   },
   {
     icon: ClipboardCheck,
