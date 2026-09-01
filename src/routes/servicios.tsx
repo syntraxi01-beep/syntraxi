@@ -10,11 +10,10 @@ import {
 import { packagesQuery } from "@/lib/catalog";
 import { usdExact } from "@/lib/quote";
 import { useCart } from "@/components/cart";
-import inst1 from "@/assets/inst-1.jpg";
-import inst2 from "@/assets/inst-2.jpg";
-import inst3 from "@/assets/inst-3.jpg";
-import inst4 from "@/assets/inst-4.jpg";
-
+import inst1 from "@/assets/inst1.jpg";
+import inst2 from "@/assets/inst2.jpg";
+import inst3 from "@/assets/inst3.jpg";
+import inst4 from "@/assets/inst4.jpg";
 export const Route = createFileRoute("/servicios")({
   head: () => ({
     meta: [
