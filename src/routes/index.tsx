@@ -6,6 +6,7 @@ import { packagesQuery } from "@/lib/catalog";
 import { usdExact } from "@/lib/quote";
 import { useCart } from "@/components/cart";
 import heroImg from "@/assets/hero-puerto.jpg";
+import inst1 from "@/assets/inst1.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -174,24 +175,33 @@ function Home() {
 
       <section className="px-6 py-24">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-10 max-w-2xl">
-            <span className="eyebrow mb-4">Instrumentación & automatización industrial</span>
-            <h2 className="mb-4 font-display text-4xl font-bold">Servicios de instrumentación</h2>
-            <p className="text-muted-foreground">
-              Más de 8 años de experiencia en diagnóstico de campo, integración de marcas líderes del sector y
-              respaldo técnico documentado para auditorías y clientes finales.
-            </p>
-          </div>
-
-          <div className="mb-10 flex flex-wrap gap-3">
-            {instrumentationBrands.map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full border border-border bg-card px-4 py-2 text-xs font-bold uppercase tracking-widest text-muted-foreground"
-              >
-                {tag}
-              </span>
-            ))}
+          <div className="mb-14 grid gap-10 lg:grid-cols-[1fr_420px] lg:items-center">
+            <div className="max-w-2xl">
+              <span className="eyebrow mb-4">Instrumentación & automatización industrial</span>
+              <h2 className="mb-4 font-display text-4xl font-bold">Servicios de instrumentación</h2>
+              <p className="mb-8 text-muted-foreground">
+                Más de 8 años de experiencia en diagnóstico de campo, integración de marcas líderes del sector y
+                respaldo técnico documentado para auditorías y clientes finales.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                {instrumentationBrands.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-full border border-border bg-card px-4 py-2 text-xs font-bold uppercase tracking-widest text-muted-foreground"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <img
+              src={inst1}
+              alt="Técnico de Syntraxi realizando trabajo en altura sobre un recipiente a presión"
+              loading="lazy"
+              width={700}
+              height={620}
+              className="aspect-[4/5] w-full rounded-3xl object-cover outline outline-1 -outline-offset-1 outline-border"
+            />
           </div>
 
           <div className="grid gap-8 md:grid-cols-2">
