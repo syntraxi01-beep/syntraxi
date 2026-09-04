@@ -1,10 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { Boxes, Factory, Bot, ArrowRight, Gauge, Radio, Zap, ClipboardCheck } from "lucide-react";
+import { Boxes, Factory, ArrowRight, Gauge, Radio, Zap, ClipboardCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { packagesQuery } from "@/lib/catalog";
-import { usdExact } from "@/lib/quote";
-import { useCart } from "@/components/cart";
+import { WHATSAPP_URL, waLink } from "@/components/site-footer";
 import heroImg from "@/assets/hero-puerto.jpg";
 import inst1 from "@/assets/inst1.jpg";
 
@@ -15,12 +14,12 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Proveedores validados, control de calidad, aduanas y entrega en tu puerta. Cotiza en línea, compra productos importados y sigue tu pedido.",
+          "Proveedores validados, control de calidad, aduanas y entrega en tu puerta. Cuéntanos qué necesitas y te asesoramos por WhatsApp.",
       },
       { property: "og:title", content: "Syntraxi — Importación desde China a Colombia" },
       {
         property: "og:description",
-        content: "Importación inteligente, tienda en línea, cotizador y portal de cliente.",
+        content: "Importación inteligente, instrumentación industrial y dropshipping con asesoría personalizada.",
       },
     ],
   }),
@@ -36,7 +35,8 @@ const services = [
     title: "Dropshipping Pro",
     body: "Enviamos directo a tu cliente final en Colombia. Sin inventario, sin riesgos innecesarios.",
     bullets: ["Proveedores validados", "Gestión de pedidos y devoluciones"],
-    to: "/servicios",
+    to: "/servicios" as const,
+    hash: "dropshipping",
     cta: "Saber más",
   },
   {
@@ -44,18 +44,11 @@ const services = [
     title: "Carga e instrumentación",
     body: "Maquinaria, sensores y automatización industrial con todos los permisos y calibración en origen.",
     bullets: ["Partidas arancelarias", "Inspección técnica en origen"],
-    to: "/servicios",
+    to: "/servicios" as const,
+    hash: "instrumentacion",
     cta: "Saber más",
   },
-  {
-    icon: Bot,
-    title: "Cotizador inteligente",
-    body: "Calcula flete, arancel, IVA y gestión en segundos antes de comprometer un peso.",
-    bullets: ["Estimado inmediato", "Comparativa de rutas"],
-    to: "/cotizador",
-    cta: "Iniciar cotización",
-  },
-] as const;
+];
 
 const instrumentationBrands = ["Endress+Hauser", "Siemens S7-1200", "Lazos 4-20 mA", "Diagramas P&ID"] as const;
 
@@ -76,7 +69,7 @@ const instrumentationServices = [
     icon: Zap,
     title: "Reestructuración de tableros de control",
     sector: "Manufactura · Transformación · Líneas continuas",
-    body:   "Corrección de fallas en tableros de potencia para reactores o motores, integración de señales de campo en PLC.",
+    body: "Corrección de fallas en tableros de potencia para reactores o motores, integración de señales de campo en PLC.",
   },
   {
     icon: ClipboardCheck,
@@ -86,9 +79,15 @@ const instrumentationServices = [
   },
 ] as const;
 
+const howItWorks = [
+  { num: "01", title: "Nos cuentas qué necesitas", body: "Un producto para importar o un servicio técnico de instrumentación." },
+  { num: "02", title: "Te asesoramos por WhatsApp", body: "Resolvemos tus dudas y te damos una cotización clara para tu caso." },
+  { num: "03", title: "Acordamos alcance y forma de pago", body: "Sin sorpresas: sabes exactamente qué incluye antes de empezar." },
+  { num: "04", title: "Ejecutamos con seguimiento", body: "Te mantenemos al tanto en cada etapa hasta la entrega." },
+] as const;
+
 function Home() {
   const { data: packages } = useSuspenseQuery(packagesQuery);
-  const { add } = useCart();
 
   return (
     <>
@@ -101,14 +100,16 @@ function Home() {
             </h1>
             <p className="mb-10 max-w-md text-lg leading-relaxed text-muted-foreground">
               Importación inteligente con proveedores validados, control de calidad y aduanas gestionadas.
-              Cotiza en línea y sigue cada etapa desde tu portal.
+              Cuéntanos qué necesitas y te asesoramos por WhatsApp.
             </p>
             <div className="flex flex-wrap gap-4">
               <Button asChild size="lg" className="rounded-xl bg-ink px-8 py-6 text-base font-bold text-ink-foreground hover:bg-ink/90">
-                <Link to="/cotizador">Probar cotizador IA</Link>
+                <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
+                  Hablar con un asesor
+                </a>
               </Button>
               <Button asChild size="lg" variant="outline" className="rounded-xl bg-card px-8 py-6 text-base font-bold">
-                <Link to="/tienda">Ver catálogo</Link>
+                <Link to="/servicios">Ver servicios</Link>
               </Button>
             </div>
           </div>
@@ -146,7 +147,7 @@ function Home() {
             </Link>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-2">
             {services.map((service) => (
               <div
                 key={service.title}
@@ -165,7 +166,7 @@ function Home() {
                   ))}
                 </ul>
                 <Button asChild variant="outline" className="w-full rounded-lg font-bold">
-                  <Link to={service.to}>{service.cta}</Link>
+                  <a href={`${service.to}#${service.hash}`}>{service.cta}</a>
                 </Button>
               </div>
             ))}
@@ -221,10 +222,35 @@ function Home() {
 
       <section className="bg-secondary/30 px-6 py-24">
         <div className="mx-auto max-w-7xl">
+          <div className="mb-12 max-w-2xl">
+            <span className="eyebrow mb-4">Metodología</span>
+            <h2 className="mb-4 font-display text-4xl font-bold">Cómo trabajamos</h2>
+            <p className="text-muted-foreground">
+              Sin pagos en línea ni sorpresas: primero conversamos, te asesoramos y acordamos contigo el alcance y el
+              precio exacto para tu caso antes de empezar.
+            </p>
+          </div>
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {howItWorks.map((step) => (
+              <div key={step.num} className="rounded-3xl border border-border bg-card p-6">
+                <span className="mb-4 grid size-10 place-items-center rounded-lg bg-secondary text-sm font-bold text-muted-foreground">
+                  {step.num}
+                </span>
+                <h3 className="mb-2 font-display text-base font-bold">{step.title}</h3>
+                <p className="text-sm text-muted-foreground">{step.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-24">
+        <div className="mx-auto max-w-7xl">
           <div className="mb-12 max-w-xl">
             <h2 className="mb-4 font-display text-4xl font-bold">Paquetes de servicio</h2>
             <p className="text-muted-foreground">
-              Contrata en línea el acompañamiento que necesitas, desde una importación puntual hasta operación continua.
+              Cada plan es el punto de partida de una conversación: tú eliges qué quieres importar o qué servicio
+              técnico necesitas, y te damos una cotización personalizada por WhatsApp.
             </p>
           </div>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
@@ -233,18 +259,14 @@ function Home() {
                 key={pack.id}
                 className={
                   pack.highlighted
-                    ? "rounded-3xl border-2 border-primary bg-card p-8 shadow-panel"
-                    : "rounded-3xl border border-border bg-card p-8"
+                    ? "flex flex-col rounded-3xl border-2 border-primary bg-card p-8 shadow-panel"
+                    : "flex flex-col rounded-3xl border border-border bg-card p-8"
                 }
               >
                 <p className="mb-2 text-[10px] font-bold uppercase tracking-widest text-primary">{pack.name}</p>
-                <p className="mb-6 font-display text-3xl font-bold">
-                  {pack.price_usd === null ? "A medida" : usdExact(pack.price_usd)}
-                  {pack.price_usd !== null && (
-                    <span className="text-sm font-normal text-muted-foreground">/{pack.billing_interval}</span>
-                  )}
-                </p>
-                <ul className="mb-8 space-y-3">
+                <p className="mb-6 font-display text-2xl font-bold">Cotización personalizada</p>
+                <p className="mb-6 text-sm text-muted-foreground">{pack.description}</p>
+                <ul className="mb-8 flex-1 space-y-3">
                   {pack.features.map((feature) => (
                     <li key={feature} className="flex gap-2 text-sm text-muted-foreground">
                       <span className="text-primary">✓</span>
@@ -255,17 +277,15 @@ function Home() {
                 <Button
                   variant={pack.highlighted ? "default" : "outline"}
                   className="w-full rounded-lg"
-                  onClick={() =>
-                    add({
-                      id: pack.id,
-                      slug: pack.slug,
-                      name: pack.name,
-                      price_usd: pack.price_usd ?? 0,
-                      kind: "servicio",
-                    })
-                  }
+                  asChild
                 >
-                  {pack.price_usd === null ? "Hablar con ventas" : "Contratar"}
+                  <a
+                    href={waLink(`Hola Syntraxi, quiero información sobre el ${pack.name}.`)}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Hablar por WhatsApp
+                  </a>
                 </Button>
               </div>
             ))}
@@ -277,17 +297,17 @@ function Home() {
         <div className="relative mx-auto max-w-4xl overflow-hidden rounded-4xl bg-ink p-10 text-ink-foreground md:p-16">
           <div className="relative z-10">
             <h2 className="mb-6 font-display text-3xl font-bold md:text-5xl">
-              Calcula tu próxima
+              ¿Listo para importar
               <br />
-              importación ahora.
+              o contratar el servicio?
             </h2>
             <p className="mb-10 max-w-lg text-ink-muted">
-              Flete, arancel, IVA y gestión estimados en segundos. Guardamos tu cotización y un asesor la revisa contigo.
+              Cuéntanos qué necesitas y te respondemos con una propuesta clara, sin compromiso.
             </p>
             <Button asChild size="lg" className="rounded-xl px-8 py-6 text-base font-bold">
-              <Link to="/cotizador">
-                Obtener tarifa estimada <ArrowRight className="ml-2 size-4" />
-              </Link>
+              <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
+                Escríbenos por WhatsApp <ArrowRight className="ml-2 size-4" />
+              </a>
             </Button>
           </div>
           <div className="absolute -right-20 -top-20 size-64 rounded-full bg-primary/20 blur-3xl" />
