@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useSession } from "@/hooks/use-session";
 import { usdExact } from "@/lib/quote";
+import { waLink } from "@/components/site-footer";
 
 export const Route = createFileRoute("/portal")({
   head: () => ({
@@ -87,9 +88,14 @@ function Portal() {
         {quotes.length === 0 ? (
           <p className="text-sm text-muted-foreground">
             Aún no tienes cotizaciones.{" "}
-            <Link to="/cotizador" className="underline underline-offset-4">
-              Crear una
-            </Link>
+            <a
+              href={waLink("Hola Syntraxi, quiero solicitar una cotización.")}
+              target="_blank"
+              rel="noreferrer"
+              className="underline underline-offset-4"
+            >
+              Escríbenos por WhatsApp
+            </a>
           </p>
         ) : (
           <div className="space-y-3">
@@ -119,9 +125,14 @@ function Portal() {
         {orders.length === 0 ? (
           <p className="text-sm text-muted-foreground">
             Todavía no hay pedidos.{" "}
-            <Link to="/tienda" className="underline underline-offset-4">
-              Ver tienda
-            </Link>
+            <a
+              href={waLink("Hola Syntraxi, quiero hacer un pedido.")}
+              target="_blank"
+              rel="noreferrer"
+              className="underline underline-offset-4"
+            >
+              Escríbenos por WhatsApp
+            </a>
           </p>
         ) : (
           <div className="space-y-3">
