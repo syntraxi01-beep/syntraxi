@@ -34,20 +34,20 @@ export const Route = createFileRoute("/servicios")({
 
 const instrumentacionFotos = [
   { src: inst1, alt: "Técnico de Syntraxi realizando trabajo en altura sobre un recipiente a presión" },
-  { src: inst2, alt: "Calibración de transmisor Rosemount en campo" },
-  { src: inst3, alt: "Banco de calibración con equipo Ametek en taller" },
-  { src: inst4, alt: "Calibración de instrumento de presión en planta" },
+  { src: inst2, alt: "Ajuste de parámetros de transmisor Rosemount en campo" },
+  { src: inst3, alt: "Banco de pruebas con equipo Ametek en taller" },
+  { src: inst4, alt: "Ajuste de parámetros de instrumento de presión en planta" },
 ];
 
 const instrumentacion = [
   {
     title: "Mantenimiento y telemetría de caudal",
-    body: "Calibración, diagnóstico en sitio y monitoreo de macromedidores y registradores en red.",
+    body: "Ajustes de parámetros, diagnóstico en sitio y monitoreo de macromedidores y registradores en red.",
     sector: "Servicios públicos y acueductos",
   },
   {
     title: "Puesta en marcha e instrumentación",
-    body: "Configuración, calibración y comunicación de sensores de nivel, flujo y presión.",
+    body: "Configuración, ajustes de parámetros y comunicación de sensores de nivel, flujo y presión.",
     sector: "Industria química y agroindustrial",
   },
   {
