@@ -10,7 +10,6 @@ import {
 import type { ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { CartProvider } from "@/components/cart";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { AiChat } from "@/components/ai-chat";
@@ -80,7 +79,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Importa desde China con proveedores validados, logística y aduanas gestionadas. Tienda, cotizador y portal de cliente.",
+          "Importación desde China, instrumentación industrial y dropshipping con acompañamiento personalizado. Escríbenos por WhatsApp para tu cotización.",
       },
       { name: "author", content: "Syntraxi" },
       { property: "og:type", content: "website" },
@@ -127,18 +126,16 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <CartProvider>
-        <div className="flex min-h-screen flex-col">
-          <SiteHeader />
-          <main className="flex-1">
-            {/* Required: nested routes render here. */}
-            <Outlet />
-          </main>
-          <SiteFooter />
-        </div>
-        <AiChat />
-        <Toaster position="top-center" />
-      </CartProvider>
+      <div className="flex min-h-screen flex-col">
+        <SiteHeader />
+        <main className="flex-1">
+          {/* Required: nested routes render here. */}
+          <Outlet />
+        </main>
+        <SiteFooter />
+      </div>
+      <AiChat />
+      <Toaster position="top-center" />
     </QueryClientProvider>
   );
 }
