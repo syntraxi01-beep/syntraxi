@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import {
@@ -8,12 +8,13 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { packagesQuery } from "@/lib/catalog";
-import { usdExact } from "@/lib/quote";
-import { useCart } from "@/components/cart";
+import { waLink } from "@/components/site-footer";
 import inst1 from "@/assets/inst1.jpg";
 import inst2 from "@/assets/inst2.jpg";
 import inst3 from "@/assets/inst3.jpg";
 import inst4 from "@/assets/inst4.jpg";
+import dropshippingImg from "@/assets/dropshipping.jpg";
+
 export const Route = createFileRoute("/servicios")({
   head: () => ({
     meta: [
@@ -21,7 +22,7 @@ export const Route = createFileRoute("/servicios")({
       {
         name: "description",
         content:
-          "Paquetes de importación con pago en línea, instrumentación industrial con más de 8 años de experiencia y dropshipping sin inventario.",
+          "Importación con asesoría personalizada, instrumentación industrial con más de 8 años de experiencia y dropshipping sin inventario.",
       },
       { property: "og:title", content: "Servicios Syntraxi" },
       { property: "og:description", content: "Importación, instrumentación industrial y dropshipping para Colombia." },
@@ -51,7 +52,7 @@ const instrumentacion = [
   },
   {
     title: "Reestructuración de tableros de control",
-    body: "Corrección de fallas en tableros de potencia, integración de borneras y PLCs.",
+    body: "Corrección de fallas en tableros de potencia, integración de señales de campo en PLC.",
     sector: "Manufactura y líneas continuas",
   },
   {
@@ -60,6 +61,13 @@ const instrumentacion = [
     sector: "Contratistas e ingeniería",
   },
 ];
+
+const howItWorks = [
+  { num: "01", title: "Nos cuentas qué necesitas", body: "Un producto para importar o un servicio técnico de instrumentación." },
+  { num: "02", title: "Te asesoramos por WhatsApp", body: "Resolvemos tus dudas y te damos una cotización clara para tu caso." },
+  { num: "03", title: "Acordamos alcance y forma de pago", body: "Sin sorpresas: sabes exactamente qué incluye antes de empezar." },
+  { num: "04", title: "Ejecutamos con seguimiento", body: "Te mantenemos al tanto en cada etapa hasta la entrega." },
+] as const;
 
 const faqs = [
   {
@@ -75,14 +83,13 @@ const faqs = [
     a: "No. Nosotros ponemos la red de proveedores, la negociación y el control de calidad.",
   },
   {
-    q: "¿Puedo pagar en línea?",
-    a: "Sí. Los paquetes de servicio y los productos del catálogo se pagan desde el sitio y quedan registrados en tu portal.",
+    q: "¿Cómo se define el precio y cómo se paga?",
+    a: "El precio depende de qué vas a importar o del servicio técnico que necesites, así que lo definimos contigo por WhatsApp antes de empezar. Una vez de acuerdo, coordinamos la forma de pago.",
   },
 ];
 
 function Servicios() {
   const { data: packages } = useSuspenseQuery(packagesQuery);
-  const { add } = useCart();
 
   return (
     <div className="px-6 py-16">
@@ -94,49 +101,73 @@ function Servicios() {
           dropshipping.
         </p>
 
-        <div className="mb-24 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {packages.map((pack) => (
-            <div
-              key={pack.id}
-              className={
-                pack.highlighted
-                  ? "flex flex-col rounded-3xl border-2 border-primary bg-card p-8 shadow-panel"
-                  : "flex flex-col rounded-3xl border border-border bg-card p-8"
-              }
-            >
-              <p className="mb-2 text-[10px] font-bold uppercase tracking-widest text-primary">{pack.name}</p>
-              <p className="mb-2 font-display text-3xl font-bold">
-                {pack.price_usd === null ? "A medida" : usdExact(pack.price_usd)}
-                {pack.price_usd !== null && (
-                  <span className="text-sm font-normal text-muted-foreground">/{pack.billing_interval}</span>
-                )}
-              </p>
-              <p className="mb-6 text-sm text-muted-foreground">{pack.description}</p>
-              <ul className="mb-8 flex-1 space-y-3">
-                {pack.features.map((feature) => (
-                  <li key={feature} className="flex gap-2 text-sm text-muted-foreground">
-                    <span className="text-primary">✓</span>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-              <Button
-                variant={pack.highlighted ? "default" : "outline"}
-                className="w-full rounded-lg"
-                onClick={() =>
-                  add({
-                    id: pack.id,
-                    slug: pack.slug,
-                    name: pack.name,
-                    price_usd: pack.price_usd ?? 0,
-                    kind: "servicio",
-                  })
+        <div className="mb-24">
+          <div className="mb-10 max-w-2xl">
+            <span className="eyebrow mb-4">Metodología</span>
+            <h2 className="mb-4 font-display text-3xl font-bold">Cómo trabajamos</h2>
+            <p className="text-muted-foreground">
+              Sin pagos en línea ni sorpresas: primero conversamos, te asesoramos y acordamos contigo el alcance y el
+              precio exacto para tu caso antes de empezar.
+            </p>
+          </div>
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {howItWorks.map((step) => (
+              <div key={step.num} className="rounded-3xl border border-border bg-card p-6">
+                <span className="mb-4 grid size-10 place-items-center rounded-lg bg-secondary text-sm font-bold text-muted-foreground">
+                  {step.num}
+                </span>
+                <h3 className="mb-2 font-display text-base font-bold">{step.title}</h3>
+                <p className="text-sm text-muted-foreground">{step.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mb-24">
+          <div className="mb-10 max-w-2xl">
+            <h2 className="mb-4 font-display text-3xl font-bold">Paquetes de servicio</h2>
+            <p className="text-muted-foreground">
+              Cada plan es el punto de partida de una conversación: tú eliges qué quieres importar o qué servicio
+              técnico necesitas, y te damos una cotización personalizada por WhatsApp.
+            </p>
+          </div>
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            {packages.map((pack) => (
+              <div
+                key={pack.id}
+                className={
+                  pack.highlighted
+                    ? "flex flex-col rounded-3xl border-2 border-primary bg-card p-8 shadow-panel"
+                    : "flex flex-col rounded-3xl border border-border bg-card p-8"
                 }
               >
-                Contratar
-              </Button>
-            </div>
-          ))}
+                <p className="mb-2 text-[10px] font-bold uppercase tracking-widest text-primary">{pack.name}</p>
+                <p className="mb-2 font-display text-2xl font-bold">Cotización personalizada</p>
+                <p className="mb-6 text-sm text-muted-foreground">{pack.description}</p>
+                <ul className="mb-8 flex-1 space-y-3">
+                  {pack.features.map((feature) => (
+                    <li key={feature} className="flex gap-2 text-sm text-muted-foreground">
+                      <span className="text-primary">✓</span>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <Button
+                  variant={pack.highlighted ? "default" : "outline"}
+                  className="w-full rounded-lg"
+                  asChild
+                >
+                  <a
+                    href={waLink(`Hola Syntraxi, quiero información sobre el ${pack.name}.`)}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Hablar por WhatsApp
+                  </a>
+                </Button>
+              </div>
+            ))}
+          </div>
         </div>
 
         <section id="instrumentacion" className="mb-24 rounded-3xl border border-border bg-card p-10">
@@ -178,21 +209,42 @@ function Servicios() {
             ))}
           </div>
           <Button asChild variant="outline" className="mt-8 rounded-xl">
-            <Link to="/cotizador">Solicitar diagnóstico técnico</Link>
+            <a
+              href={waLink("Hola Syntraxi, quiero solicitar un diagnóstico técnico de instrumentación.")}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Solicitar diagnóstico técnico
+            </a>
           </Button>
         </section>
 
         <section id="dropshipping" className="mb-24 grid gap-8 md:grid-cols-2">
-          <div className="rounded-3xl bg-ink p-10 text-ink-foreground">
-            <p className="mb-3 text-[10px] font-bold uppercase tracking-widest text-ink-muted">Emprendimiento</p>
-            <h2 className="mb-4 font-display text-2xl font-bold">Dropshipping sin inventario</h2>
-            <p className="mb-8 text-sm text-ink-muted">
-              Conectamos tu tienda con proveedores que despachan directo a tu cliente final. Nosotros gestionamos
-              pedidos, envíos y devoluciones.
-            </p>
-            <Button asChild className="rounded-xl">
-              <Link to="/cotizador">Quiero empezar</Link>
-            </Button>
+          <div className="relative min-h-[420px] overflow-hidden rounded-3xl p-10 text-ink-foreground">
+            <img
+              src={dropshippingImg}
+              alt="Persona gestionando pedidos y paquetes de dropshipping desde su computador"
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/85 to-ink/40" />
+            <div className="relative z-10 flex h-full flex-col justify-end">
+              <p className="mb-3 text-[10px] font-bold uppercase tracking-widest text-ink-muted">Emprendimiento</p>
+              <h2 className="mb-4 font-display text-2xl font-bold">Dropshipping sin inventario</h2>
+              <p className="mb-8 text-sm text-ink-muted">
+                Conectamos tu tienda con proveedores que despachan directo a tu cliente final. Nosotros gestionamos
+                pedidos, envíos y devoluciones.
+              </p>
+              <Button asChild className="w-fit rounded-xl">
+                <a
+                  href={waLink("Hola Syntraxi, quiero empezar con el servicio de dropshipping.")}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Quiero empezar
+                </a>
+              </Button>
+            </div>
           </div>
           <div className="rounded-3xl border border-border bg-card p-10">
             <h2 className="mb-4 font-display text-2xl font-bold">Cómo funciona</h2>
