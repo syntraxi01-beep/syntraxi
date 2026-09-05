@@ -12,7 +12,7 @@ import type { ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { AiChat } from "@/components/ai-chat";
+import { WhatsappFab } from "@/components/whatsapp-fab";
 import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
@@ -134,7 +134,7 @@ function RootComponent() {
         </main>
         <SiteFooter />
       </div>
-      <AiChat />
+      <WhatsappFab />
       <Toaster position="top-center" />
     </QueryClientProvider>
   );
