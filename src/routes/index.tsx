@@ -127,7 +127,7 @@ function Home() {
               <div className="mb-3 h-2 w-full rounded-full bg-secondary">
                 <div className="h-full w-2/3 rounded-full bg-primary" />
               </div>
-              <p className="text-sm font-medium">En tránsito: Mar de China</p>
+              <p className="text-sm font-medium">En puerto marítimo: Shenzhen, China</p>
             </div>
           </div>
         </div>
