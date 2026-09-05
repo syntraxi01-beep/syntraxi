@@ -80,7 +80,7 @@ const instrumentationServices = [
 ] as const;
 
 const howItWorks = [
-  { num: "01", title: "Nos cuentas qué necesitas", body: "Un producto para importar o un servicio técnico de instrumentación." },
+  { num: "01", title: "Vemos tu necesidad", body: "Un producto para importar o un servicio técnico de instrumentación." },
   { num: "02", title: "Te asesoramos por WhatsApp", body: "Resolvemos tus dudas y te damos una cotización clara para tu caso." },
   { num: "03", title: "Acordamos alcance y forma de pago", body: "Sin sorpresas: sabes exactamente qué incluye antes de empezar." },
   { num: "04", title: "Ejecutamos con seguimiento", body: "Te mantenemos al tanto en cada etapa hasta la entrega." },
@@ -100,7 +100,7 @@ function Home() {
             </h1>
             <p className="mb-10 max-w-md text-lg leading-relaxed text-muted-foreground">
               Importación inteligente con proveedores validados, control de calidad y aduanas gestionadas.
-              Cuéntanos qué necesitas y te asesoramos por WhatsApp.
+              Cuéntanos qué necesitas y te asesoramos.
             </p>
             <div className="flex flex-wrap gap-4">
               <Button asChild size="lg" className="rounded-xl bg-ink px-8 py-6 text-base font-bold text-ink-foreground hover:bg-ink/90">
