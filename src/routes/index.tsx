@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { Boxes, Factory, ArrowRight, Gauge, Radio, Zap, ClipboardCheck } from "lucide-react";
+import { Globe, CircuitBoard, ArrowRight, Gauge, Radio, Zap, ClipboardCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { packagesQuery } from "@/lib/catalog";
 import { WHATSAPP_URL, waLink } from "@/components/site-footer";
@@ -31,7 +31,7 @@ export const Route = createFileRoute("/")({
 
 const services = [
   {
-    icon: Boxes,
+    icon: Globe,
     title: "Dropshipping Pro",
     body: "Enviamos directo a tu cliente final en Colombia. Sin inventario, sin riesgos innecesarios.",
     bullets: ["Proveedores validados", "Gestión de pedidos y devoluciones"],
@@ -40,7 +40,7 @@ const services = [
     cta: "Saber más",
   },
   {
-    icon: Factory,
+    icon: CircuitBoard,
     title: "Instrumentación industrial en planta",
     body: "Evita paradas y fallas costosas: diagnóstico, ajustes de parámetros y automatización con más de 8 años de experiencia en campo. ¿También necesitas importar equipos? Lo gestionamos por ti.",
     bullets: ["Diagnóstico y ajustes de parámetros en sitio", "Automatización y tableros de control"],
@@ -153,8 +153,8 @@ function Home() {
                 key={service.title}
                 className="group rounded-3xl border border-border bg-card p-8 transition-all hover:border-primary/30"
               >
-                <div className="mb-6 grid size-12 place-items-center rounded-xl bg-secondary text-foreground transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                  <service.icon className="size-5" />
+                <div className="mb-6 grid size-14 place-items-center rounded-2xl bg-gradient-to-br from-primary to-primary/70 text-primary-foreground shadow-md">
+                  <service.icon className="size-6" />
                 </div>
                 <h3 className="mb-3 font-display text-xl font-bold">{service.title}</h3>
                 <p className="mb-6 text-sm leading-relaxed text-muted-foreground">{service.body}</p>
